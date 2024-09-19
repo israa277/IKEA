@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.IKEA.DAL.Persistance.Data.Configurations.Departments
+namespace LinkDev.IKEA.DAL.Persistence.Data.Configurations.Departments
 {
     internal class DapartmentConfigurations : IEntityTypeConfiguration<Department>
     {

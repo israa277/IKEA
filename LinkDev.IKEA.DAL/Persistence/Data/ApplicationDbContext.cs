@@ -7,11 +7,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.IKEA.DAL.Persistance.Data
+namespace LinkDev.IKEA.DAL.Persistence.Data
 {
-    internal class ApplicationDbContext: DbContext
+    public class ApplicationDbContext: DbContext
     {
-        public ApplicationDbContext() : base()
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
