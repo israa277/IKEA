@@ -22,7 +22,7 @@ namespace LinkDev.IKEA.PL.Controllers
             _departmentService = departmentService;
         }
         [HttpGet] //GET :/Department/Index
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             var departments = _departmentService.GetAllDepartment();
             return View(departments);
@@ -69,6 +69,20 @@ namespace LinkDev.IKEA.PL.Controllers
                 }
             }
         }
-    }
+
+        [HttpGet] //GET :/Department/Details
+        public IActionResult Details(int? id)
+        {
+            if(id is null)
+            
+                return BadRequest();
+            var department = _departmentService.GetDepartment(id.Value);
+            if(department is null)
+                return NotFound();
+            return View(department);
+        
+        }
+
+    } 
 }
 
