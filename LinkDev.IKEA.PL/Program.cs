@@ -1,3 +1,4 @@
+using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.DAL.Persistence.Data;
 using LinkDev.IKEA.DAL.Persistence.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace LinkDev.IKEA.PL
         //Entry Point
         public static void Main(string[] args)
         {
-            
+
             var builder = WebApplication.CreateBuilder(args);
 
             #region Configure Services
@@ -22,7 +23,10 @@ namespace LinkDev.IKEA.PL
                 optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
             //builder.Services.AddScoped<ApplicationDbContext>();
             //builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>((ServiceProvider) =>
             //{
@@ -51,7 +55,7 @@ namespace LinkDev.IKEA.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"); 
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             #endregion
 
             app.Run();
