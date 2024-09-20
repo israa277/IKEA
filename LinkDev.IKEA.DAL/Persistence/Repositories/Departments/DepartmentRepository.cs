@@ -50,6 +50,9 @@ namespace LinkDev.IKEA.DAL.Persistence.Repositories.Departments
             return _dbContext.SaveChanges();
         }
 
-     
+        public IQueryable<Department> GetAllAsIQueryable()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
