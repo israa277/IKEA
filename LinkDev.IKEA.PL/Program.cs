@@ -36,7 +36,6 @@ namespace LinkDev.IKEA.PL
             //    return options;
             //});
             #endregion
-
             var app = builder.Build();
 
             #region Configure Kestrel Middlewares
