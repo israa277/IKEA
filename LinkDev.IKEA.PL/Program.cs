@@ -1,6 +1,9 @@
 using LinkDev.IKEA.BLL.Services.Departments;
+using LinkDev.IKEA.BLL.Services.Employees;
 using LinkDev.IKEA.DAL.Persistence.Data;
 using LinkDev.IKEA.DAL.Persistence.Repositories.Departments;
+using LinkDev.IKEA.DAL.Persistence.Repositories.Employees;
+using LinkDev.IKEA.DAL.Persistence.Repositories.Employess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -24,8 +27,10 @@ namespace LinkDev.IKEA.PL
             });
 
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeService,EmployeeServices>();
 
             //builder.Services.AddScoped<ApplicationDbContext>();
             //builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>((ServiceProvider) =>
@@ -36,7 +41,6 @@ namespace LinkDev.IKEA.PL
             //    return options;
             //});
             #endregion
-
             var app = builder.Build();
 
             #region Configure Kestrel Middlewares

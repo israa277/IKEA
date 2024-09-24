@@ -1,9 +1,10 @@
 ﻿@model DepartmentDepartmentDto
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Department Details</h1>
+<h1>Are you Sure to Delete this Department?</h1>
+
 <br />
 <br />
 
@@ -70,10 +71,9 @@
 
     </div>
 
-    <div class="mt-4">
-
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a>
+    <form asp-action="Delete" asp-route-id="@Model.Id" method ="post" class="mt-4">
+        <input type="submit" value="Delete"  class="btn btn-danger"/>
         <a asp-action="Index" class="btn btn-secondary">Back To List</a>
-    </div>
+    </form>
 
 </div>
