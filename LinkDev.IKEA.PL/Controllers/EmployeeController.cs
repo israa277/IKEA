@@ -46,6 +46,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Create
         [HttpGet] // GET : /Employee/Create
+        [ValidateAntiForgeryToken]
         public IActionResult Create()
         {
             return View();
@@ -82,6 +83,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Update
         [HttpGet] // Get: Employee/Edit/id
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -152,6 +154,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Delete
         [HttpGet] // Get /Employee/Delete/id?
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int? id)
         {
             if (id is null)

@@ -59,6 +59,7 @@ namespace LinkDev.IKEA.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Creatre(CreatedDepartmentDto department)
         {
             if (!ModelState.IsValid)
@@ -93,6 +94,7 @@ namespace LinkDev.IKEA.PL.Controllers
         #region Update
 
         [HttpGet] // Get: Department/Edit/id
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -153,6 +155,7 @@ namespace LinkDev.IKEA.PL.Controllers
         #region Delete
 
         [HttpGet] // Get /Department/Delete/id?
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int? id)
         {
             if (id is null)
