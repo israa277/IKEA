@@ -1,4 +1,4 @@
-﻿using LinkDev.IKEA.BLL.Models.Departments;
+﻿using LinkDev.IKEA.BLL.Models.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using LinkDev.IKEA.BLL.Models.Departments;
+﻿using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.DAL.Entities.Employees;
 using LinkDev.IKEA.DAL.Persistence.Repositories.Employess;
 using System;
@@ -76,8 +76,8 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 IsActive = employee.IsActive,
                 Email = employee.Email,
                 Salary = employee.Salary,
-                Gender = nameof(employee.Gender),
-                EmployeeType = nameof(employee.EmployeeType),
+                Gender = employee.Gender.ToString(),
+                EmployeeType = employee.EmployeeType.ToString(),
             });
         }
         public EmployeeDetailsDto? GetEmployeeById(int id)
