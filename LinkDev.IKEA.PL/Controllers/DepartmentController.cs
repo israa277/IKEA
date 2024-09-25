@@ -30,6 +30,13 @@ namespace LinkDev.IKEA.PL.Controllers
         [HttpGet] //GET :/Department/Index
         public IActionResult Index()
         {
+            // Views Dictionary : Pass Data From Controller(Action) To View (From View ---> [Partial View , Layout])
+            // 1 . ViewData is a Dictionary Type Property
+            ViewData["Message"] = "Hello ViewData";
+            // 2. ViewBag is a Dynamic Type Property
+            ViewBag.Message = "Hello Bag";
+            ViewBag.Message = new { Id = 10, Name = "ISRAA" };
+
             var departments = _departmentService.GetAllDepartment();
             return View(departments);
         }
