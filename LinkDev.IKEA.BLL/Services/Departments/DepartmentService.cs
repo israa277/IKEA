@@ -32,11 +32,11 @@ namespace LinkDev.IKEA.BLL.Services.Departments
 
         }
 
-        public DepartmentDepartmentDto? GetDepartmentById(int id)
+        public DepartmentDetailsDto? GetDepartmentById(int id)
         {
             var department = _departmentsRepository.Get(id);
             if (department is { })
-                return new DepartmentDepartmentDto()
+                return new DepartmentDetailsDto()
                 {
                     Id = department.Id,
                     Code = department.Code,
