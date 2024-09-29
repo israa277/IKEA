@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.Persistence.Repositories._Generic
 {
-    public class GenericRepository<T> where T : ModelBase
+    public class GenericRepository<T> : IGenericRepository<T> where T : ModelBase
     {
         private protected readonly ApplicationDbContext _dbContext;
         public GenericRepository(ApplicationDbContext dbContext)

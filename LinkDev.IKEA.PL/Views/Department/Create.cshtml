@@ -1,35 +1,16 @@
-﻿@model CreatedDepartmentDto
+﻿@model DepartmentViewModel
 
 @{
     ViewData["Title"] = "Create";
+    ViewBag.Action = "Create";
 }
 
 <div class="row justify-content-center align-items-center flex-column">
     <h1 class="col-6 my-4">Create new Deparment</h1>
-    <from asp-action="Create" class="col-6">
-        <div asp-validation-summary="ModelOnly"></div>
-        <div class=" offset-3 form-group mb-3">
-            <label class="form-label" asp-for="Code">Code</label>
-            <input asp-for="Code" class="form-control" />
-            <span asp-validation-for="Code" class="text-danger"></span>
-        </div>
-        <div class="offset-3 form-group mb-3">
-            <label class="form-label" asp-for="Name">Name</label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="offset-3 form-group mb-3">
-            <label class="form-label" asp-for="Description">Description</label>
-            <textarea asp-for="Description" class="form-control"></textarea>
-        </div>
-        <div class="form-group mb-4 ">
-            <label class="form-label" asp-for="CreationDate">CreationDate</label>
-            <input asp-for="CreationDate" class="form-control" />
-        </div>
-        <div>
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="btn btn-light">Back To List</a>
-        </div>
-    </from>
+    <partial name="Partials/CreateEditDepartmentPartial" />
 </div>
 
+@section ValidationScripts 
+{
+    <partial name="_ValidationScriptsPartial" />
+}
