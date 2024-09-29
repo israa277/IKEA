@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkDev.IKEA.DAL.Entities.Department;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +22,6 @@ namespace LinkDev.IKEA.BLL.Models.Employees
 
         public string Gender { get; set; } = null!;
         public string EmployeeType { get; set; } = null!;
-
-
+        public Department Department { get; set; } = null!;
     }
 }

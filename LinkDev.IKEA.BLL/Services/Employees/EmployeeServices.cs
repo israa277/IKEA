@@ -1,6 +1,7 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.DAL.Entities.Employees;
 using LinkDev.IKEA.DAL.Persistence.Repositories.Employess;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,20 +66,31 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 return _employeeRepository.Delete(employee) > 0;
             return false;
         }
-        public IEnumerable<EmployeeDto> GetAllEmployees()
+        public IEnumerable<EmployeeDto> GetAllEmployees(string Search)
         {
-            return _employeeRepository.GetAllAsIQueryable().Select(employee => new EmployeeDto()
-            {
-                Id = employee.Id,
-                Name = employee.Name,
-                Age = employee.Age,
-                Address = employee.Address,
-                IsActive = employee.IsActive,
-                Email = employee.Email,
-                Salary = employee.Salary,
-                Gender = employee.Gender.ToString(),
-                EmployeeType = employee.EmployeeType.ToString(),
-            });
+            var employees = _employeeRepository.GetAllAsIQueryable()
+                .Where(E => !E.IsDeleted && (string.IsNullOrEmpty(Search) || E.Name.ToLower().Contains(Search.ToLower())))
+                //.Include(E => E./*Department*/)
+                .Select(employee => new EmployeeDto()
+                {
+
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Age = employee.Age,
+                    Address = employee.Address,
+                    IsActive = employee.IsActive,
+                    Email = employee.Email,
+                    Salary = employee.Salary,
+                    Gender = nameof(employee.Gender),
+                    EmployeeType = nameof(employee.EmployeeType),
+                   // Department = employee.Department.Name
+
+
+                }).ToList();
+
+
+
+            return employees;
         }
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
@@ -97,6 +109,11 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                     EmployeeType = employee.EmployeeType
                 };
             return null;
+        }
+
+        public IEnumerable<EmployeeDto> GetAllEmployees()
+        {
+            throw new NotImplementedException();
         }
     }
 }
