@@ -1,6 +1,7 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.DAL.Entities.Employees;
 using LinkDev.IKEA.DAL.Persistence.Repositories.Employess;
+using LinkDev.IKEA.DAL.Persistence.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,13 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 {
     public class EmployeeServices : IEmployeeService
     {
-        private readonly IEmployeeRepository _employeeRepository;
-        public EmployeeServices(IEmployeeRepository employeeRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        //  private readonly IEmployeeRepository _employeeRepository;
+        public EmployeeServices(IUnitOfWork unitOfWork)
         {
-            _employeeRepository = employeeRepository;
+            this._unitOfWork = unitOfWork;
+            // _employeeRepository = employeeRepository;
         }
         public int CreateEmployee(CreatedEmployeeDto employeeDto)
         {
@@ -35,7 +39,8 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow,
             };
-            return _employeeRepository.Add(employee);
+             _unitOfWork.EmployeeRepository.Add(employee);
+            return _unitOfWork.Complete();
         }
         public int UpdateEmployee(UpdateEmployeeDto employeeDto)
         {
@@ -56,19 +61,20 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow,
             };
-            return _employeeRepository.Update(employee);
+             _unitOfWork.EmployeeRepository.Update(employee);
+            return _unitOfWork.Complete();
         }
 
         public bool DeleteEmployee(int id)
         {
-            var employee = _employeeRepository.Get(id);
+            var employee = _unitOfWork.EmployeeRepository.Get(id);
             if (employee is { })
-                return _employeeRepository.Delete(employee) > 0;
-            return false;
+                 _unitOfWork.EmployeeRepository.Delete(employee)  ;
+            return _unitOfWork.Complete()>0;
         }
         public IEnumerable<EmployeeDto> GetAllEmployees(string Search)
         {
-            var employees = _employeeRepository.GetAllAsIQueryable()
+            var employees = _unitOfWork.EmployeeRepository.GetAllAsIQueryable()
                 .Where(E => !E.IsDeleted && (string.IsNullOrEmpty(Search) || E.Name.ToLower().Contains(Search.ToLower())))
                 //.Include(E => E./*Department*/)
                 .Select(employee => new EmployeeDto()
@@ -94,7 +100,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
         }
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
-            var employee = _employeeRepository.Get(id);
+            var employee = _unitOfWork.EmployeeRepository.Get(id);
             if (employee is { })
                 return new EmployeeDetailsDto()
                 {
