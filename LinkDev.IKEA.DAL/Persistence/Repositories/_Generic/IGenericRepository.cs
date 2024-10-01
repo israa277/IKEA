@@ -12,9 +12,9 @@ namespace LinkDev.IKEA.DAL.Persistence.Repositories._Generic
         T? Get(int id);
         IEnumerable<T> GetAll(bool withAsNoTracking = true);
         IQueryable<T> GetAllAsIQueryable();
-        int Add(T entity);
-        int Update(T entity);
-        int Delete(T entity);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 }
 

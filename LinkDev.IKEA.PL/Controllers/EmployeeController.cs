@@ -24,9 +24,9 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Index
         [HttpGet] // GeT :/employee/Index
-        public IActionResult Index()
+        public IActionResult Index(string Search)
         {
-            var employees = _employeeService.GetAllEmployees();
+            var employees = _employeeService.GetAllEmployees(/*Search*/);
             return View(employees);
         }
         #endregion
